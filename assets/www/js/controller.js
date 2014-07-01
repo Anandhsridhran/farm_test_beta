@@ -1050,7 +1050,7 @@ if(ini.val()!="")
                              location.href = "#/app/barnHome/"+bid;
                              });
             barninfo.error(function (data, status, headers) {
-                           alert(data + status);
+                           alert("Enter Treatment details");
                            });
           }
           else
