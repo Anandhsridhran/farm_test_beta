@@ -286,6 +286,9 @@ angular.module('starter.controllers', ['ionic'])
 .controller('barnHomeCtrl', function($scope, $stateParams, $http,$timeout,$filter, $ionicLoading,$ionicPopup) {
             
             // Setup the loader
+
+             window.localStorage["PigTreatsCount"]=null;
+            window.localStorage["PigDeathsCount"]=null;
             $ionicLoading.show({
                                content: 'Loading',
                                animation: 'fade-in',
@@ -608,6 +611,7 @@ angular.module('starter.controllers', ['ionic'])
             var ele = angular.element(document.getElementById("shipmentDate"));
             
            // alert($scope.shipmentdate.text);
+           if($scope.supplier.text!=""){
             var bookData = {
             "barn_id": bid,
             "shipment_date": ele.val(),
@@ -621,6 +625,16 @@ angular.module('starter.controllers', ['ionic'])
             shipment.success(function (data, status, headers) {
                              location.href="#/app/barnHome/"+bid;
                              });
+          }
+          else
+          {
+              $ionicPopup.alert({
+                              title: 'Please Enter the Details',
+                              template: '',
+                              buttons:[{text:"OK",type:"button button-clear button-positive"}]
+                              
+                              });
+          }
             
             
             }
@@ -635,7 +649,7 @@ angular.module('starter.controllers', ['ionic'])
             else
             {
             $ionicPopup.alert({
-                              title: 'Please select date by clicking on date column beside',
+                              title: 'Please select date ',
                               template: '',
                               buttons:[{text:"OK",type:"button button-clear button-positive"}]
                               
@@ -975,6 +989,8 @@ angular.module('starter.controllers', ['ionic'])
             var invurl='http://nano.amfnano.com/inventory_reports.json?user_credentials='+window.localStorage["login_token"];
             var bookData;
 //            alert($rootScope.pigarrayDeaths.length + "---"+$rootScope.pigarrayTreatments.length);
+if(ini.val()!="")
+{
             if($rootScope.pigarrayDeaths.length==0 && $rootScope.pigarrayTreatments.length==0)
             {
             bookData = {
@@ -1036,6 +1052,17 @@ angular.module('starter.controllers', ['ionic'])
             barninfo.error(function (data, status, headers) {
                            alert(data + status);
                            });
+          }
+          else
+          {
+             $ionicPopup.alert({
+                                               title: 'Please Enter Initials',
+                                               template: '',
+                                               buttons:[{text:"OK",type:"button button-clear button-positive"}]
+                                               
+                                               });
+                             
+          }
             
             }
             $scope.goBack = function() {
