@@ -5,7 +5,7 @@
     <ion-content class="has-header" style="background-color:rgb(240,241,248);" >
         <div style="float:left;width:100%;margin-top:5%">
             <span style="float:left;width:80%;padding-left:5%;padding-top:3%;">Pig Deaths</span>
-            <input type="text"  id ="pigno" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;" ng-model="pignodeath.text" ng-change="pigdeathsonchange()" valid-number ></div>
+            <input type="text"  id ="pigno" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;border:1px solid black;" ng-model="pignodeath.text" ng-change="pigdeathsonchange()" valid-number ></div>
         <div id="deathPigDiv" class="list" >
             
             <label class="item item-input item-select" ng-repeat="cargoItem in cargo.CargoItems">
@@ -20,10 +20,18 @@
              </select>
              <label>-->
         </div>
+            <div class="row" style="margin-top:10%;">
+                    
+                <div class="col col-50">
+                    <a class="button button-outline button-light" style="border-radius:5px;margin-top:10%;background-color:white;color:black;width:100%;border:1px solid black;" href="#/app/barnHome/{{barn_id}}" >Cancel</a>
+                </div>
+                <div class="col col-50">
+                    <a class="button button-outline button-light" style="border-radius:5px;margin-top:10%;background-color:white;color:black;width:100%;border:1px solid black;" ng-click="savepigdeath()">Next</a>
+                </div>
+            </div>
         
-        <a  style="border-radius:5px;text-align:center;background-color:white;color:black;width:42.5%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;padding-bottom:3%;" href="#/app/barnHome/{{barn_id}}" >Cancel</a>
         
-        <a  style="padding-bottom:3%;border-radius:5px;text-align:center;background-color:white;color:black;width:42.5%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;" ng-click="savepigdeath()">Next</a>
+        
         <!--<div class="bar bar-footer" style="background-color:rgb(240,241,248);border:none;">
          <a class="button button-outline button-light" href="#/barnHome/{{barn_id}}" style="background-color:white;color:black;width:80%;margin-left:10%;"> Cancel</button>
          </div>-->

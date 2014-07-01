@@ -5,7 +5,7 @@ angular.module('starter.controllers', ['ionic'])
             })
 
 .controller('loginCtrl', function($scope, $http, $ionicPopup) {
-          
+           
             var logdata=[];
             $scope.name = {text:''};
             $scope.password = {text:''};
@@ -78,8 +78,11 @@ angular.module('starter.controllers', ['ionic'])
             var config = {
             headers: {
             'Content-Type': 'application/json',
+             'timeout':'1000',
+          
             }
             }
+         
             var farmjson = $http.get(url,config)
             farmjson.success(function (data, status, headers) {
                              $scope.farms = data;
@@ -127,6 +130,7 @@ angular.module('starter.controllers', ['ionic'])
                                              result += "<li  id='locationsli" + data[j].location_id + "' style='width:100%;float:left;border-bottom:1px solid #c3c3c3;padding:5%;padding-left:40px'><a style='width:100%;float:left;' id='" + data[j].location_id+ "' class='locationanch'><img src='img/"+data[j].system_status+"1.png' style='margin-right:20px;float:left;'/>" + data[j].name + "</a></li>";
                                              }
                                              $scope.getBarrns(data[j].location_id,data[j].system_status);
+                                            // $scope.getValuesofBarns(data[j].location_id,data[j].system_status);
                                              j++;
                                              });
                              result += "</ul>";
@@ -144,12 +148,73 @@ angular.module('starter.controllers', ['ionic'])
             
             }
             
+            $scope.temparatureValuesJson=[];
+              var getJSONvaluesTemp=[];
+            $scope.getValuesofBarns=function(id,st){
+            var tempurl3 = 'http://nano.amfnano.com/locations/'+id+'/barns.json?user_credentials='+window.localStorage['login_token'];
+            var tempbarnjson = $http.get(tempurl3,config);
+            
+            tempbarnjson.success(function (data, status, headers) {
+                                 
+                                 var j = 0;
+                               
+                             angular.forEach(data, function (count) {
+                                             
+                                             var tempurl4 = 'http://nano.amfnano.com/barns/'+data[j].barn_id+'/last_reading.json?user_credentials='+window.localStorage["login_token"];
+                                             
+                                             var temparatureValue,HumValue;
+                                             // var temparatureJson= $http.get(url4,config);
+                                             
+                                             var testTemperarureValues= $http.get(tempurl4,config);
+                                             testTemperarureValues.success(function (resp, status, headers) {
+                                                                     var tempJson={};
+                                                                         var Burndata=resp;
+                                                                         if(Burndata.temperatures.length == 0 || Burndata.temperatures == undefined ){
+                                                                         temparatureValue = "NA";
+                                                                         }
+                                                                         else{
+                                                                         temparatureValue = Burndata.temperatures[0].value;
+                                                                         }
+                                                                         if(Burndata.humidity == null || Burndata.humidity == undefined){
+                                                                         HumValue = "NA";
+                                                                         }
+                                                                         else{
+                                                                         HumValue = Burndata.humidity;
+                                                                         }
+                                                                        tempJson={"temparature":temparatureValue,"humidity":HumValue};
+                                                                             
+                                                                    getJSONvaluesTemp.push(tempJson);
+                                                                           
+                                                                            j++;
+                                                                             
+                                                                         });
+                                           
+                                             alert(JSON.stringify(getJSONvaluesTemp));
+
+
+                                             });
+                             });
+            
+            
+           
+            
+                    $scope.getBarrns(id,st);
+            
+            }
+            
+            
+            
+            
+            
             //Barns GET http request
             $scope.getBarrns = function (id,st) {
+               // alert(JSON.stringify($scope.temparatureValuesJson));
             var url3 = 'http://nano.amfnano.com/locations/'+id+'/barns.json?user_credentials='+window.localStorage['login_token'];
             
-            var barnjson = $http.get(url3,config)
+            var barnjson = $http.get(url3,config);
             barnjson.success(function (data, status, headers) {
+                             var tempDataObject=data;
+                             //alert(tempDataObject.barn[0].name);
                              var ele = angular.element(document.getElementById("locationsli" + id));
                              var result;
                              if(st=="OK")
@@ -163,26 +228,44 @@ angular.module('starter.controllers', ['ionic'])
                              
                              var j = 0;
                              var k=0;
-                             var barnids='';
-                             angular.forEach(data, function (count) {
-                                             barnids=barnids + data[k].barn_id+",";
-                                             k++;
-                                             });
-                             //var barnDetails= $scope.getLogData(data[0].barn_id);
-                            // alert(JSON.stringify(barnDetails));
-                             angular.forEach(data, function (count) {
-                                            // alert(JSON.stringify(data));
-                                             //var barnDetails=$scope.getlastReading(data[j].barn_id);
-//                                             alert(barnDetails);
-                                             if((j+1)==data.length)
-                                             {
-                                             result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a style='width:100%;float:left;text-decoration:none;color:white;padding-left:20px;' href='#/app/barnHome/"+data[j].barn_id+"'><img src='img/"+data[j].system_status+"1.png' style='margin-right:15px;float:left;'/>" + data[j].name + "</a></li>";
-                                             }
-                                             else{
-                                             result += "<li style='border-bottom:1px solid #c3c3c3;width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a href='#/app/barnHome/"+data[j].barn_id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:20px;'><img src='img/"+data[j].system_status+"1.png' style='margin-right:15px;float:left;' />" + data[j].name + "</a></li>";
-                                             }
-                                             j++;
-                                             });
+
+                            for (var h=0; h<tempDataObject.barn.length; h++){
+                             if(tempDataObject.read[j]!=null && tempDataObject.read[j]!=undefined)
+                             {
+                             
+                             var humBarn='';
+                             if(tempDataObject.read[j].humidity== null || tempDataObject.read[j].humidity == undefined){
+                            humBarn = "NA";
+                             }
+                             else{
+                             humBarn = tempDataObject.read[j].humidity;
+                             }
+                             
+                                                                           if((j+1)==tempDataObject.barn.length)
+                                                                           {
+                                                                           result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a id='anch"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;' href='#/app/barnHome/"+tempDataObject.barn[j].id+"'><img src='img/"+tempDataObject.read[j].system_status+"1.png' style='margin-right:15px;float:left;'/><span style='float:left;'>" + tempDataObject.barn[j].name +" </span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+humBarn+"%</span><span style='margin-left:10px;;color:white;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                                                                           }
+                                                                           else{
+                                                                           result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;border-bottom:1px solid #c3c3c3;'><a id='anch"+tempDataObject.barn[j].id+"'  href='#/app/barnHome/"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;'><img src='img/"+tempDataObject.read[j].system_status+"1.png' style='margin-right:15px;float:left;' /><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+humBarn+"%</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                                                                           }
+                             }
+                             else
+                             {
+                             if((j+1)==tempDataObject.barn.length)
+                             {
+                             result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a id='anch"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;' href='#/app/barnHome/"+tempDataObject.barn[j].id+"'><img src='img/1.png' style='margin-right:15px;float:left;'/><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='margin-left:10px;color:white;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                             }
+                             else{
+                             result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;border-bottom:1px solid #c3c3c3;'><a id='anch"+tempDataObject.barn[j].id+"'  href='#/app/barnHome/"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;'><img src='img/1.png' style='margin-right:15px;float:left;' /><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                             }
+
+                             }
+                                                                      //  $scope.getlastReading(tempDataObject[j].barn_id);
+                                                                           j++;
+
+                             
+
+                             }
                              result += "</ul>";
                              
                              ele.append(result);
@@ -196,48 +279,7 @@ angular.module('starter.controllers', ['ionic'])
                                              });
                            });
             }
-            $scope.getlastReading=function(bid){
-         //   alert(bid);
-            var splitvalue=bid.split(',');
-            var result="";
-            for(var i=0;i<splitvalue.length-1;i++)
-            {
-            var urla='http://nano.amfnano.com/barns/'+bid+'/last_reading.json?user_credentials='+window.localStorage["login_token"];
-            var urlb='http://nano.amfnano.com/barns/'+bid+'/last_inventory_report.json?user_credentials='+window.localStorage["login_token"];
-            var config = {
-            headers: {
-            'Content-Type': 'application/json',
-           
-            }
-            }
-            var barninfo1 = $http.get(urla,config);
             
-            barninfo1.success(function (data, status, headers) {
-//                              alert("kj");
-                              if(data.temperatures.length == 0 && data.temperatures == undefined ){
-                              result += "NA **";
-                              }
-                              else{
-                              result += data.temperatures[0].value+"**";
-                              }
-                              if(data.humidity == null || data.humidity == undefined){
-                              result +="NA **";
-                              }
-                              else{
-                              result += data.humidity+"**";
-                              }
-                              })
-            var barninfo2 = $http.get(urlb,config);
-            
-            barninfo2.success(function (data, status, headers) {
-//                              alert("2");
-                              result += data.total_inventory+"**";
-                              })
-
-            }
-//          alert(result);
-            return result;
-            }
                        })
 
 
@@ -642,12 +684,12 @@ angular.module('starter.controllers', ['ionic'])
             var result='';
             for (var i=0; i<$scope.pigntreated.text; i++)
             {
-            result+='<label class="item">';
+            result+='<div class="item">';
             result+='<div class="input-label">Pig '+(i+1)+'</div>';
-            result+='<input type="text" placeholder="Name of Medicine" id="medicine'+(i+1)+'" style="border:1px solid #c3c3c3;margin-top:2%;"/>';
-            result+='<input type="text" placeholder="Dosage" id="dosage'+(i+1)+'" style="border:1px solid #c3c3c3;margin-top:2%;"/>';
-            result+='<input type="text" placeholder="Route of Adminstration" id="route'+(i+1)+'" style="border:1px solid #c3c3c3;margin-top:2%;"/>';
-            result+='</label>';
+            result+='<input type="text" placeholder="Name of Medicine" id="medicine'+(i+1)+'" style="border:1px solid #c3c3c3;margin-top:2%;float:left;"/>';
+            result+='<input type="text" placeholder="Dosage" id="dosage'+(i+1)+'" style="border:1px solid #c3c3c3;float:left;"/>';
+            result+='<input type="text" placeholder="Route of Adminstration" id="route'+(i+1)+'" style="border:1px solid #c3c3c3;float:left;"/>';
+            result+='</div>';
             }
             
             window.localStorage["PigTreatsCount"]=$scope.pigntreated.text;

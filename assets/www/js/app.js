@@ -11,6 +11,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+      cordova.plugins.Keyboard.disableScroll(false);
     }
     if(window.StatusBar) {
       StatusBar.styleDefault();

@@ -5,17 +5,25 @@
     <ion-content class="has-header" style="background-color:rgb(240,241,248);" >
         <div style="float:left;width:100%;margin-top:5%">
             <span style="float:left;width:80%;padding-left:5%;padding-top:3%;">Pig Treated :</span>
-            <input type="text" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;" ng-model="pigntreated.text" ng-change="pigtreatedonchange()" valid-number></div>
+            <input type="text" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;border:1px solid black;" ng-model="pigntreated.text" ng-change="pigtreatedonchange()" valid-number></div>
         <div id="treatPigDiv" class="list" >
-            <label class="item" ng-repeat="pigTreat in pigtreatDetails">
+            <div class="item" ng-repeat="pigTreat in pigtreatDetails">
                 <div class="input-label">Pig {{pigTreat.count}}</div>
                 <input type="text" ng-model="pigTreat.medicine_given" id="medicine{{pigTreat.count}}" style="border:1px solid #c3c3c3;margin-top:2%;"/>
                 <input type="text" ng-model="pigTreat.dosage" id="dosage{{pigTreat.count}}" style="border:1px solid #c3c3c3;margin-top:2%;"/>
                 <input type="text" ng-model="pigTreat.how_administered" id="route{{pigTreat.count}}" style="border:1px solid #c3c3c3;margin-top:2%;"/>
-            </label>
+            </div>
         </div>
-           <a  style="border-radius:5px;text-align:center;background-color:white;color:black;width:42.5%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;padding-bottom:3%;" href="#/app/barnHome/{{barn_id}}" >Cancel</a>
-        <a  style="padding-bottom:3%;border-radius:5px;text-align:center;background-color:white;color:black;width:42.5%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;" ng-click="savePigtreatments()" >Review</a>
+        <div class="row">
+            <div class="col col-50">
+            <a class="button button-outline button-light" style="border-radius:5px;margin-top:10%;background-color:white;color:black;width:100%;border:1px solid black;" href="#/app/barnHome/{{barn_id}}" >Cancel</a>
+            </div>
+            <div class="col col-50">
+            <a class="button button-outline button-light" style="border-radius:5px;margin-top:10%;background-color:white;color:black;width:100%;border:1px solid black;" ng-click="savePigtreatments()" >Review</a>
+            </div>
+        </div>
+        
+        
      
         <!--<div class="bar bar-footer" style="background-color:rgb(240,241,248);border:none;">
          <a class="button button-outline button-light" href="#/barnHome/{{barn_id}}" style="background-color:white;color:black;width:80%;margin-left:10%;"> Cancel</button>
