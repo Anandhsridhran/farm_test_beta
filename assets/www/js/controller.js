@@ -1050,7 +1050,12 @@ if(ini.val()!="")
                              location.href = "#/app/barnHome/"+bid;
                              });
             barninfo.error(function (data, status, headers) {
-                           alert("Enter Treatment details");
+                           $ionicPopup.alert({
+                                               title: 'Please Enter all Treatment Details',
+                                               template: '',
+                                               buttons:[{text:"OK",type:"button button-clear button-positive"}]
+                                               
+                                               });
                            });
           }
           else
