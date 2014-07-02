@@ -95,7 +95,7 @@ angular.module('starter.controllers', ['ionic'])
                              });
             farmjson.error(function (data, status, headers) {
                            $ionicPopup.alert({
-                                             title: 'Invalid username or password',
+                                             title: 'Cannot Load the date due to network problem',
                                              template: '',
                                              buttons:[{text:"OK",type:"button button-clear button-positive"}]
                                              
@@ -139,7 +139,7 @@ angular.module('starter.controllers', ['ionic'])
                              });
             sitejson.error(function (data, status, headers) {
                            $ionicPopup.alert({
-                                             title: 'Invalid username or password',
+                                             title: 'Cannot Load the date due to network problem',
                                              template: '',
                                              buttons:[{text:"OK",type:"button button-clear button-positive"}]
                                              
@@ -272,7 +272,7 @@ angular.module('starter.controllers', ['ionic'])
                              });
             barnjson.error(function (data, status, headers) {
                            $ionicPopup.alert({
-                                             title: 'Invalid username or password',
+                                             title: 'Cannot Load the date due to network problem',
                                              template: '',
                                              buttons:[{text:"OK",type:"button button-clear button-positive"}]
                                              
@@ -307,7 +307,10 @@ angular.module('starter.controllers', ['ionic'])
             var name = window.localStorage["first_name"]+" "+window.localStorage["last_name"];
             if(window.localStorage["role"]=="BarnManager")
             {
-            //$scope.inventoryBtnStatus={text:"block"};
+            $scope.inventoryBtnStatus={text:"block"};
+            }
+            else{
+              $scope.inventoryBtnStatus={text:"none"};
             }
             $scope.title = name;
             var urla='http://nano.amfnano.com/barns/'+bid+'/last_reading.json?user_credentials='+window.localStorage["login_token"];
@@ -623,6 +626,12 @@ angular.module('starter.controllers', ['ionic'])
             var shipmenturl= 'http://nano.amfnano.com/shipments.json?user_credentials='+window.localStorage["login_token"];
             var shipment= $http.post(shipmenturl,JSON.stringify(bookData),config);
             shipment.success(function (data, status, headers) {
+                            $ionicPopup.alert({
+                                             title: 'Inserted Shipment Successfully',
+                                             template: '',
+                                             buttons:[{text:"OK",type:"button button-clear button-positive"}]
+                                             
+                                             });
                              location.href="#/app/barnHome/"+bid;
                              });
           }
