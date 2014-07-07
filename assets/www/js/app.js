@@ -53,16 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           }
         }
     })
-        
-//    .state('app.login', {
-//        url: "/login",
-//        views: {
-//        'menuContent' :{
-//           templateUrl: "hog/login.html",
-//           controller: 'loginCtrl'
-//         }
-//       }
-//    })
+
     .state('app.farms', {
       url: "/farms",
       views: {
@@ -73,7 +64,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('app.barnHome', {
-        url: "/barnHome/:barn_id",
+        url: "/barnHome/:barn_id/:barn_name/:loc_name/:farm_name",
         views: {
         'menuContent' :{
         templateUrl: "hog/barnHome.html",
@@ -91,7 +82,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
     .state('app.inventory', {
-        url: "/inventory/:barn_id",
+        url: "/inventory/:barn_id/:barn_name/:loc_name/:farm_name",
         views: {
             'menuContent' :{
                templateUrl: "hog/inventory.html",
@@ -100,7 +91,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
     .state('app.inventory2', {
-        url: "/inventory2/:barn_id",
+        url: "/inventory2/:barn_id/:barn_name/:loc_name/:farm_name",
         views: {
             'menuContent' :{
                templateUrl: "hog/inventory2.html",
@@ -109,7 +100,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
     })
     .state('app.inventory3', {
-                      url: "/inventory3/:barn_id",
+                      url: "/inventory3/:barn_id/:barn_name/:loc_name/:farm_name",
                       views: {
                       'menuContent' :{
                       templateUrl: "hog/inventory3.html",
@@ -118,7 +109,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                       }
                       })
         .state('app.inventory4', {
-               url: "/inventory4/:barn_id",
+               url: "/inventory4/:barn_id/:barn_name/:loc_name/:farm_name",
                views: {
                'menuContent' :{
                templateUrl: "hog/inventory4.html",
@@ -127,7 +118,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                }
                })
         .state('app.inventory5', {
-               url: "/inventory5/:barn_id",
+               url: "/inventory5/:barn_id/:barn_name/:loc_name/:farm_name",
                         views: {
                         'menuContent' :{
                         templateUrl: "hog/inventory5.html",
@@ -136,7 +127,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                         }
                         })
         .state('app.inventory6', {
-                                 url: "/inventory6/:barn_id",
+                                 url: "/inventory6/:barn_id/:barn_name/:loc_name/:farm_name",
                                  views: {
                                  'menuContent' :{
                                  templateUrl: "hog/inventory6.html",
@@ -145,7 +136,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                                  }
                                  })
         .state('app.review', {
-               url: '/review/:barn_id',
+               url: "/review/:barn_id/:barn_name/:loc_name/:farm_name",
                views: {
                'menuContent' :{
                templateUrl: 'hog/review.html',

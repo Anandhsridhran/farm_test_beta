@@ -2,29 +2,29 @@
     <ion-nav-buttons side="left">
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
-    <ion-content class="has-header" style="background-color:rgb(235,236,244);" >
-        <label class="item item-input" style="background-color:rgb(235,236,244);border:none;margin-left:3%;">
-            Any Pig treated ?
-            
+    <div class="bar bar-subheader" style="border-top: 1px solid gray;height:8%">
+        <h2 class="title" style="color:gray;">{{fname}}-{{lname}}-{{bname}}</h2>
+    </div>
+    <ion-content class="has-header" style="background-color:#cacde2;margin-top:8%;" >
+        <label class="item item-input" style="background-color:#cacde2;border:none;width:100%;margin-top:2%;">
+            <div class="input-label" style="font-weight:normal;margin-left:2%;font-size:16px;">Any Pig treated ?</div> 
         </label>
-        
         <div class="row" style="margin-top:5%;">
             
             <div class="col col-50">
-                <!--<a   ng-click="goBack()" style="border-radius:5px;padding:9% 35%;margin-top:10%;background-color:white;color:black;width:100%;">Back</a>-->
-                <a href="#/app/inventory6/{{barn_id}}"  style="border-radius:5px;padding:9% 41%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;border: 1px solid gray">Yes</a>
+                
+                <a href="#/app/inventory6/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}"  style="border-radius:10px;padding:9% 41%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;">Yes</a>
+
             </div>
             <div class="col col-50">
-                <a  style="border-radius:5px;padding:9% 41%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;border: 1px solid gray" ng-click="no_treats()">
-                    No
-                </a>
+                <a  style="border-radius:10px;padding:9% 41%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;" ng-click="no_treats()">No</a>
             </div>
         </div>
         <br/>
         <br/>
         <div class="row">
             <div class="col">
-                <a class="button button-outline button-light" href="#/app/barnHome/{{barn_id}}" style="background-color:white;color:black;width:80%;margin-left:10%;border:1px solid black;"> Cancel</a>
+                <a class="button button-outline button-light" href="#/app/barnHome/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" style="background-color:white;color:black;width:80%;margin-left:10%;border-radius:10px;"> Cancel</a>
             </div>
         </div>
 

@@ -1,25 +1,20 @@
 <ion-side-menus class ="login">
     
     <ion-side-menu-content>
-        <ion-content style="background-color:rgb(240,241,248)">
+        <ion-content style="background-color:#cacde2;">
             <div class="list list-inset login">
                 <div style="text-align:center; margin-top:10%;">
                     <img src="farm_assist_logo.png" style="margin-top:10%;">
                 </div>
                 <br/>
-                <label class="item item-input" style="border-radius:10px;background-color:rgb(213,219,237);">
-                    <input ng-model='name.text' name="userName" type="text" placeholder="User Name"  style="border-radius:10px;" required>
-                </label>
+                    <input ng-model='name.text' name="userName" type="text" placeholder="User Name"  style="border-radius:10px;background-color:#D5DBED;color:black;">
                 <br/>
-                <label class="item item-input" style="border-radius:10px;background-color:rgb(213,219,237);">
-                    <input ng-model='password.text' name="password" type="password" placeholder="Password" style="border-radius:10px;" required>
-                        </label>
+                    <input ng-model='password.text' name="password" type="password" placeholder="Password" style="border-radius:10px;background-color:rgb(213,219,237);color:black;">
                 <br/>
-                <button ng-click="submitbutton()" class="button button-block button-positive" style="border-radius:10px;border-color:rgb(145,165,211);background-color:rgb(145,165,211);color:white;">
-                    Submit
+                <button ng-click="submitbutton()" class="button button-block" style="background-color:#91A5D3;color:white;border-radius:10px;">
+                    Log in
                 </button>
             </div>
-            
         </ion-content>
     </ion-side-menu-content>
 </ion-side-menus>

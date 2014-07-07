@@ -11,8 +11,10 @@ angular.module('starter.controllers', ['ionic'])
             $scope.password = {text:''};
             $scope.submitbutton = function($window){
             var postData =  {
-            "username": $scope.name.text,
-            "password": $scope.password.text
+            // "username": $scope.name.text,
+            // "password": $scope.password.text
+             "username": "fcbm",
+            "password": "demouser"
             };
             var config = {
             headers: {
@@ -35,7 +37,7 @@ angular.module('starter.controllers', ['ionic'])
                           if(data.role=="BarnManager")
                           {
                           // alert(JSON.stringify(data));
-                          location.href = '#/app/barnHome/'+data.barn_id;
+                          location.href = '#/app/barnHome/'+data.barn_id+'/'+data.barn_id+'/'+data.location_id+'/'+data.farm_id;
                           }
                           else
                           {
@@ -89,7 +91,7 @@ angular.module('starter.controllers', ['ionic'])
                              var i = 0;
                              angular.forEach(data, function (count) {
                                              
-                                             $scope.getLoactions(data[i].farm_id,data[i].system_status);
+                                             $scope.getLoactions(data[i].farm_id,data[i].system_status,data[i].name);
                                              i++;
                                              });
                              });
@@ -102,7 +104,8 @@ angular.module('starter.controllers', ['ionic'])
                                              });
                            });
             //Sites GET http request
-            $scope.getLoactions = function (id,st) {
+            $scope.getLoactions = function (id,st,name) {
+              var fname = name;
             var url2 = ' http://nano.amfnano.com/farms/'+id+'/locations.json?user_credentials='+window.localStorage['login_token'];
             
             var sitejson = $http.get(url2,config)
@@ -129,7 +132,7 @@ angular.module('starter.controllers', ['ionic'])
                                              {
                                              result += "<li  id='locationsli" + data[j].location_id + "' style='width:100%;float:left;border-bottom:1px solid #c3c3c3;padding:5%;padding-left:40px'><a style='width:100%;float:left;' id='" + data[j].location_id+ "' class='locationanch'><img src='img/"+data[j].system_status+"1.png' style='margin-right:20px;float:left;'/>" + data[j].name + "</a></li>";
                                              }
-                                             $scope.getBarrns(data[j].location_id,data[j].system_status);
+                                             $scope.getBarrns(data[j].location_id,data[j].system_status,data[j].name,fname);
                                             // $scope.getValuesofBarns(data[j].location_id,data[j].system_status);
                                              j++;
                                              });
@@ -198,7 +201,7 @@ angular.module('starter.controllers', ['ionic'])
             
            
             
-                    $scope.getBarrns(id,st);
+                    $scope.getBarrns(id,st,lname,fname);
             
             }
             
@@ -207,10 +210,11 @@ angular.module('starter.controllers', ['ionic'])
             
             
             //Barns GET http request
-            $scope.getBarrns = function (id,st) {
+            $scope.getBarrns = function (id,st,lname,fname) {
                // alert(JSON.stringify($scope.temparatureValuesJson));
             var url3 = 'http://nano.amfnano.com/locations/'+id+'/barns.json?user_credentials='+window.localStorage['login_token'];
-            
+            var lname = lname;
+            var fname = fname;
             var barnjson = $http.get(url3,config);
             barnjson.success(function (data, status, headers) {
                              var tempDataObject=data;
@@ -243,20 +247,20 @@ angular.module('starter.controllers', ['ionic'])
                              
                                                                            if((j+1)==tempDataObject.barn.length)
                                                                            {
-                                                                           result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a id='anch"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;' href='#/app/barnHome/"+tempDataObject.barn[j].id+"'><img src='img/"+tempDataObject.read[j].system_status+"1.png' style='margin-right:15px;float:left;'/><span style='float:left;'>" + tempDataObject.barn[j].name +" </span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+humBarn+"%</span><span style='margin-left:10px;;color:white;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                                                                           result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a id='anch"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;' href='#/app/barnHome/"+tempDataObject.barn[j].id+"/"+tempDataObject.barn[j].name+"/"+lname+"/"+fname+"'><img src='img/"+tempDataObject.read[j].system_status+"1.png' style='margin-right:15px;float:left;'/><span style='float:left;'>" + tempDataObject.barn[j].name +" </span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+humBarn+"%</span><span style='margin-left:10px;;color:white;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
                                                                            }
                                                                            else{
-                                                                           result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;border-bottom:1px solid #c3c3c3;'><a id='anch"+tempDataObject.barn[j].id+"'  href='#/app/barnHome/"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;'><img src='img/"+tempDataObject.read[j].system_status+"1.png' style='margin-right:15px;float:left;' /><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+humBarn+"%</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                                                                           result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;border-bottom:1px solid #c3c3c3;'><a id='anch"+tempDataObject.barn[j].id+"'  href='#/app/barnHome/"+tempDataObject.barn[j].id+"/"+tempDataObject.barn[j].name+"/"+lname+"/"+fname+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;'><img src='img/"+tempDataObject.read[j].system_status+"1.png' style='margin-right:15px;float:left;' /><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+humBarn+"%</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
                                                                            }
                              }
                              else
                              {
                              if((j+1)==tempDataObject.barn.length)
                              {
-                             result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a id='anch"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;' href='#/app/barnHome/"+tempDataObject.barn[j].id+"'><img src='img/1.png' style='margin-right:15px;float:left;'/><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='margin-left:10px;color:white;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                             result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;'><a id='anch"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;' href='#/app/barnHome/"+tempDataObject.barn[j].id+"/"+tempDataObject.barn[j].name+"/"+lname+"/"+fname+"'><img src='img/1.png' style='margin-right:15px;float:left;'/><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='margin-left:10px;color:white;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
                              }
                              else{
-                             result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;border-bottom:1px solid #c3c3c3;'><a id='anch"+tempDataObject.barn[j].id+"'  href='#/app/barnHome/"+tempDataObject.barn[j].id+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;'><img src='img/1.png' style='margin-right:15px;float:left;' /><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
+                             result += "<li style='width:100%;float:left;padding-top:5%;background-color:rgb(131,155,207);padding-right:5%;padding-bottom:5%;margin-left:7%;border-bottom:1px solid #c3c3c3;'><a id='anch"+tempDataObject.barn[j].id+"'  href='#/app/barnHome/"+tempDataObject.barn[j].id+"/"+tempDataObject.barn[j].name+"/"+lname+"/"+fname+"' style='width:100%;float:left;text-decoration:none;color:white;padding-left:15px;'><img src='img/1.png' style='margin-right:15px;float:left;' /><span style='float:left;'>" + tempDataObject.barn[j].name +"</span><span style='color:white;margin-left:10px;font-size:10px;float:left;'>"+tempDataObject.barn[j].total_pigs+"</span></a></li>";
                              }
 
                              }
@@ -307,15 +311,34 @@ angular.module('starter.controllers', ['ionic'])
             var name = window.localStorage["first_name"]+" "+window.localStorage["last_name"];
             if(window.localStorage["role"]=="BarnManager")
             {
-            $scope.inventoryBtnStatus={text:"block"};
+              $scope.inventoryBtnStatus={text:"block"};
+              var urlbm1 = 'http://nano.amfnano.com/farms.json?user_credentials='+window.localStorage['login_token'];
+              var urlbm2 = ' http://nano.amfnano.com/farms/'+window.localStorage['farm']+'/locations.json?user_credentials='+window.localStorage['login_token'];
+              var urlbm3 = 'http://nano.amfnano.com/locations/'+window.localStorage['location']+'/barns.json?user_credentials='+window.localStorage['login_token'];
+              var farmnam = $http.get(urlbm1,config)
+              farmnam.success(function (data, status, headers) {
+              $scope.fname = data[0].name;
+              });
+              var locnam = $http.get(urlbm2,config)
+              locnam.success(function (data, status, headers) {
+              $scope.lname = data[0].name;
+              });
+              var banam = $http.get(urlbm3,config)
+              banam.success(function (data, status, headers) {
+              $scope.bname = data.barn[0].name;
+              // alert(JSON.stringify(data));
+              });
             }
             else{
               $scope.inventoryBtnStatus={text:"none"};
+              $scope.bname = $stateParams.barn_name;
+              $scope.lname = $stateParams.loc_name;
+              $scope.fname = $stateParams.farm_name;
             }
             $scope.title = name;
-            var urla='http://nano.amfnano.com/barns/'+bid+'/last_reading.json?user_credentials='+window.localStorage["login_token"];
-            var urlb='http://nano.amfnano.com/barns/'+bid+'/last_inventory_report.json?user_credentials='+window.localStorage["login_token"];
-            var urlc='http://nano.amfnano.com/barns/'+bid+'/last_event_report.json?user_credentials='+window.localStorage["login_token"];
+            var urla='http://nano.amfnano.com/barns/'+$stateParams.barn_id+'/last_reading.json?user_credentials='+window.localStorage["login_token"];
+            var urlb='http://nano.amfnano.com/barns/'+$stateParams.barn_id+'/last_inventory_report.json?user_credentials='+window.localStorage["login_token"];
+            var urlc='http://nano.amfnano.com/barns/'+$stateParams.barn_id+'/last_event_report.json?user_credentials='+window.localStorage["login_token"];
             var config = {
             headers: {
             'Content-Type': 'application/json',
@@ -421,20 +444,25 @@ angular.module('starter.controllers', ['ionic'])
             
             })
 
-.controller('inventoryCtrl', function($scope, $stateParams, $http,$filter,$rootScope,$timeout, $ionicLoading,$ionicPopup) {
+.controller('inventoryCtrl', function($scope, $stateParams, $http,$filter,$rootScope,$timeout, $ionicPopup) {
             
             // Setup the loader
-            $ionicLoading.show({
-                               content: 'Loading',
-                               animation: 'fade-in',
-                               showBackdrop: true,
-                               maxWidth: 200,
-                               showDelay: 0
-                               });
-            $timeout(function () {
-                     $ionicLoading.hide();
-                     },1000);
+            // $ionicLoading.show({
+            //                    content: 'Loading',
+            //                    animation: 'fade-in',
+            //                    showBackdrop: true,
+            //                    maxWidth: 200,
+            //                    showDelay: 0
+            //                    });
+            // $timeout(function () {
+            //          $ionicLoading.hide();
+            //          },1000);
             var PigdetailsObject=[];
+            $scope.bname = $stateParams.barn_name;
+            $scope.lname = $stateParams.loc_name;
+            $scope.fname = $stateParams.farm_name;
+            $scope.barn_id=$stateParams.barn_id;
+
             $scope.pignoshipment = {text:''};
             $scope.supplier = {text:''};
             $scope.pignodeath = {text:''};
@@ -632,7 +660,7 @@ angular.module('starter.controllers', ['ionic'])
                                              buttons:[{text:"OK",type:"button button-clear button-positive"}]
                                              
                                              });
-                             location.href="#/app/barnHome/"+bid;
+                             location.href="#/app/barnHome/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
                              });
           }
           else
@@ -653,7 +681,7 @@ angular.module('starter.controllers', ['ionic'])
             if(ele.val()!="")
             {
             $rootScope.inventorydate={text:ele.val()};
-            location.href="#/app/inventory3/"+bid;
+            location.href="#/app/inventory3/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
             }
             else
             {
@@ -707,11 +735,11 @@ angular.module('starter.controllers', ['ionic'])
             var result='';
             for (var i=0; i<$scope.pigntreated.text; i++)
             {
-            result+='<div class="item">';
+            result+='<div class="item" style="background-color:#cacde2;">';
             result+='<div class="input-label">Pig '+(i+1)+'</div>';
-            result+='<input type="text" placeholder="Name of Medicine" id="medicine'+(i+1)+'" style="border:1px solid #c3c3c3;margin-top:2%;float:left;"/>';
-            result+='<input type="text" placeholder="Dosage" id="dosage'+(i+1)+'" style="border:1px solid #c3c3c3;float:left;"/>';
-            result+='<input type="text" placeholder="Route of Adminstration" id="route'+(i+1)+'" style="border:1px solid #c3c3c3;float:left;"/>';
+            result+='<input type="text" placeholder="Name of Medicine" id="medicine'+(i+1)+'" style="border-radius:10px;margin-top:2%;float:left;"/>';
+            result+='<input type="text" placeholder="Dosage" id="dosage'+(i+1)+'" style="border-radius:10px;float:left;margin-top:2%;"/>';
+            result+='<input type="text" placeholder="Route of Adminstration" id="route'+(i+1)+'" style="border-radius:10px;float:left;margin-top:2%;"/>';
             result+='</div>';
             }
             
@@ -788,7 +816,7 @@ angular.module('starter.controllers', ['ionic'])
             //  alert(pig_array);
             $rootScope.pigarrayDeaths=pig_array;
             window.localStorage["pigarrayDeaths"]=pig_array;
-            location.href="#/app/inventory5/"+bid;
+            location.href="#/app/inventory5/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
             // alert(pig_array);
             }
             else{
@@ -835,7 +863,7 @@ angular.module('starter.controllers', ['ionic'])
             //{
             $rootScope.pigarrayTreatments=pig_treatmentarray;
             window.localStorage["pigarrayTreatments"]=pig_treatmentarray;
-            location.href="#/app/review/"+bid;
+            location.href="#/app/review/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
             //}
             //else
             //{
@@ -858,13 +886,13 @@ angular.module('starter.controllers', ['ionic'])
             $scope.no_death = function(){
             $rootScope.pigarrayDeaths=[];
             window.localStorage["PigDeathsCount"]=null;
-            location.href="#/app/inventory5/"+bid;
+            location.href="#/app/inventory5/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
             
             }
             $scope.no_treats=function(){
             $rootScope.pigarrayTreatments=[];
             window.localStorage["PigTreatsCount"]=null;
-            location.href="#/app/review/"+bid;
+            location.href="#/app/review/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
             }
             if(window.localStorage["PigDeathsCount"]>0)
             {
@@ -890,6 +918,10 @@ angular.module('starter.controllers', ['ionic'])
             $timeout(function () {
                      $ionicLoading.hide();
                      },3000);
+
+            $scope.bname = $stateParams.barn_name;
+            $scope.lname = $stateParams.loc_name;
+            $scope.fname = $stateParams.farm_name;
             $scope.pignodeath={text:""};
             $scope.pignotreat={text:""};
             $scope.pigDeathObject=[];

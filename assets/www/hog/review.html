@@ -2,12 +2,16 @@
     <ion-nav-buttons side="left">
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
-    <ion-content class="has-header" style="background-color:rgb(235,236,244);" >
-        <div style="float:left;width:100%;padding:1%;border:1px dashed black;margin-top:3%;">
+    <div class="bar bar-subheader"  style="border-top: 1px solid gray;height:8%;">
+        <h2 class="title" style="color:gray;">{{fname}}-{{lname}}-{{bname}}</h2>
+    </div>
+    <ion-content class="has-header" style="background-color:#cacde2;margin-top:8%;" >
+        <div style="float:left;width:100%;padding:1%;border:1px dashed black;margin-top:.5%;">
+            
             <div class="row">
-                <div class="col col-50"><span style="color:blue;">Last Inventory : </span></div>
-                <div class="col col-50">{{reported_at}}</div>
+                <div class="col"><span style="color:blue;">Last Inventory : {{reported_at}}</span></div>
             </div>
+
             <div class="row">
                 <div class="col col-20">Inv</div>
                 <div class="col col-30">Pig Deaths</div>
@@ -15,6 +19,7 @@
                 <div class="col col-20">Intials</div>
                 
             </div>
+
             <div class="row">
                 <div class="col col-20">{{total_inventory}}</div>
                 <div class="col col-30">{{pig_death}}</div>
@@ -22,48 +27,45 @@
                 <div class="col col-20">{{Intials}}</div>
                 
             </div>
+
         </div>
-        <!-- <label class="item item-input" style="background-color:rgb(240,241,248);border:none;margin-left:3%;">
-         Date
-         <input type="date"  value="{{inventorydate.text}}">
-         
-         </label>-->
+
         <span style="float:left;margin-left:5%;margin-top:5%;font-size:16px;"> Inventory Date  : {{inventorydate.text}}</span>
         <br/>
-         <div style="float:left;width:100%;">
-        <span style="background-color:rgb(235,236,244);border:none;padding-left:5%;padding-top:5%;width:40%;float:left;font-size:16px;"> Dead Pigs :</span> <a href="#/app/inventory4/{{barn_id}}" style="color:black;float:left;width:47%;font-size:16px;padding-top:5%;">{{pignodeath.text}}</a>
+        
+        <div style="float:left;width:100%;">
+            <span style="background-color:#cacde2;border:none;padding-left:5%;padding-top:5%;width:40%;float:left;font-size:16px;"> Dead Pigs :</span> 
+            <a href="#/app/inventory4/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" style="float:left;width:47%;font-size:16px;padding-top:5%;">{{pignodeath.text}}</a>
         </div>
         <div id="pigdeathsDiv" style="float:left;width:80%;margin-left:10%;margin-right:10%;margin-bottom:0;display:{{pigdeathStatus}}" class="list">
             <div ng-repeat="pigdeath in pigDeathObject" style="float:left;width:100%;">
-                <span style="float:left">{{pigdeath.pigname}}</span><a href="#/app/inventory4/{{barn_id}}" style="float:right">{{pigdeath.reason}}</a>
+                <span style="float:left">{{pigdeath.pigname}}</span>
+                <a href="#/app/inventory4/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" style="float:right">{{pigdeath.reason}}</a>
             </div>
-            
         </div>
         <div style="float:left;width:100%;">
-         <span style="background-color:rgb(235,236,244);border:none;padding-left:5%;padding-top:5%;width:40%;float:left;font-size:16px;"> Sick Pigs :</span> <a href="#/app/inventory6/{{barn_id}}" style="color:black;float:left;width:47%;font-size:16px;padding-top:5%;">{{pignotreat.text}}</a>
-      </div>
+            <span style="background-color:#cacde2;border:none;padding-left:5%;padding-top:5%;width:40%;float:left;font-size:16px;"> Sick Pigs :</span> 
+            <a href="#/app/inventory6/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" style="float:left;width:47%;font-size:16px;padding-top:5%;">{{pignotreat.text}}</a>
+        </div>
         <div id="pigtreatDiv"style="float:left;width:80%;margin-left:10%;margin-right:10%;margin-bottom:0;display:{{pigtreatStatus}}" class="list">
             <div ng-repeat="pigtreat in PigTreatObject" style="float:left;width:100%;">
-                <span style="float:left">{{pigtreat.pigname}}</span><a style="float:right" href="#/app/inventory6/{{barn_id}}">{{pigtreat.Treat}}</a>
+                <span style="float:left">{{pigtreat.pigname}}</span>
+                <a style="float:right" href="#/app/inventory6/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}">{{pigtreat.Treat}}</a>
             </div>
         </div>
-        <input id="review_init" type="text" placeholder="Initials"  style="width:90%;margin-left:5%;border-radius:5px;margin-top:5%;margin-bottom:5%;float:left;"/>
+        <input id="review_init" type="text" placeholder="Initials"  style="width:90%;margin-left:5%;border-radius:10px;margin-top:5%;margin-bottom:5%;float:left;"/>
         
         <div class="row" style="margin-top:10%;">
             
             <div class="col col-40">
-                <!--<a   ng-click="goBack()" style="border-radius:5px;padding:9% 35%;margin-top:10%;background-color:white;color:black;width:100%;">Back</a>-->
-                <a href="#/app/barnHome/{{barn_id}}" style="border-radius:5px;padding:9% 35%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;border: 1px solid gray">Cancel</a>
+                <a href="#/app/barnHome/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" style="border-radius:10px;padding:9% 35%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;">Cancel</a>
             </div>
             <div class="col col-40">
-                <a  style="border-radius:5px;padding:9% 35%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;border: 1px solid gray" ng-click="submitInventory()">
+                <a  style="border-radius:10px;padding:9% 35%;margin-top:10%;background-color:white;color:black;width:100%;text-decoration:none;" ng-click="submitInventory()">
                     Submit
                 </a>
             </div>
         </div>
-        <!--<div class="bar bar-footer" style="background-color:rgb(240,241,248);border:none;">
-            <a class="button button-outline button-light" href="#/app/barnHome/{{barn_id}}" style="background-color:white;color:black;width:80%;margin-left:10%;"> Cancel</button>
-                </div>-->
         
     </ion-content>
     
