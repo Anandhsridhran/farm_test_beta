@@ -11,10 +11,10 @@ angular.module('starter.controllers', ['ionic'])
             $scope.password = {text:''};
             $scope.submitbutton = function($window){
             var postData =  {
-            // "username": $scope.name.text,
-            // "password": $scope.password.text
-             "username": "fcbm",
-            "password": "demouser"
+            "username": $scope.name.text,
+            "password": $scope.password.text
+            //  "username": "fcbm",
+            // "password": "demouser"
             };
             var config = {
             headers: {
