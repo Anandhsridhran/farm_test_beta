@@ -467,6 +467,7 @@ angular.module('starter.controllers', ['ionic'])
             $scope.supplier = {text:''};
             $scope.pignodeath = {text:''};
             $scope.pigntreated = {text:''};
+            $scope.back={text:"none"};
             if($rootScope.pigarrayDeaths!=undefined)
             {
             
@@ -666,7 +667,7 @@ angular.module('starter.controllers', ['ionic'])
           else
           {
               $ionicPopup.alert({
-                              title: 'Please Enter the Details',
+                              title: 'Please enter the shipment details',
                               template: '',
                               buttons:[{text:"OK",type:"button button-clear button-positive"}]
                               
@@ -1088,7 +1089,7 @@ if(ini.val()!="")
                              
 
                             
-                             location.href = "#/app/barnHome/"+bid;
+                             location.href = "#/app/barnHome/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
                              });
             barninfo.error(function (data, status, headers) {
                            $ionicPopup.alert({

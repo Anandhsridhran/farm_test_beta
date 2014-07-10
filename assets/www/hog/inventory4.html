@@ -1,6 +1,6 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="left">
-        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+        <button menu-toggle="left" class="button-clear"><img src="menu.png"/></button>
     </ion-nav-buttons>
     <div class="bar bar-subheader" style="border-top: 1px solid gray;height:8%">
         <h2 class="title" style="color:gray;">{{fname}}-{{lname}}-{{bname}}</h2>
@@ -8,17 +8,20 @@
     <ion-content class="has-header" style="background-color:#cacde2;margin-top:8%;" >
         <div style="float:left;width:100%;margin-top:5%">
             <span style="float:left;width:80%;padding-left:5%;padding-top:3%;">Pig Deaths</span>
-            <input type="text"  id ="pigno" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;border-radius:10px;" ng-model="pignodeath.text" ng-change="pigdeathsonchange()" valid-number></input></div>
+            <input type="text"  id ="pigno" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;border-radius:10px;" ng-model="pignodeath.text" ng-change="pigdeathsonchange()" valid-number></input>
+        </div>
         <div id="deathPigDiv" class="list" style="margin-top:3%;float:left;width:100%;" >
             <label class="item item-input item-select" ng-repeat="cargoItem in cargo.CargoItems">
                 <span>Pig {{cargoItem.count}}</span>
                 <select ng-model="cargoItem.LoadPoint" id="reason{{cargoItem.count}}" ng-options="loadPoint.Text for loadPoint in LoadPoints"></select>
             </label>
         </div>
-
+        <div style="float:left;width:100%;padding-bottom:5%;padding-bottom:5%;">
+        
         <a  style="border-radius:10px;text-align:center;background-color:white;color:black;width:41%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;padding-bottom:3%;text-decoration:none;" href="#/app/barnHome/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" >Cancel</a>
         
         <a  style="padding-bottom:3%;border-radius:10px;text-align:center;background-color:white;color:black;width:41%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;text-decoration:none;" ng-click="savepigdeath()">Next</a>
 
+        </div>
     </ion-content>
 </ion-view>

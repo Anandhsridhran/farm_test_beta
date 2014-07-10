@@ -1,6 +1,6 @@
 <ion-view title="{{title}}">
-    <ion-nav-buttons side="left">
-        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    <ion-nav-buttons side="left" hide-back-button="true">
+        <button menu-toggle="left" class="button-clear"><img src="menu.png"/></button>
     </ion-nav-buttons>
     <div class="bar bar-subheader" style="border-top: 1px solid gray;height:8%;">
         <h2 class="title" style="color:gray;">{{fname}}-{{lname}}-{{bname}}</h2>
@@ -8,7 +8,7 @@
     <ion-content class="has-header" style="background-color:#cacde2;margin-top:8%;" >
         <div style="float:left;width:100%;padding:1%;border:1px dashed black;margin-top:.5%;">
             <div class="row">
-                <div class="col"><span style="color:blue;">Last Inventory : {{reported_at}}</span></div>
+                <div class="col"><span>Last Inventory : {{reported_at}}</span></div>
             </div>
             <div class="row">
                 <div class="col col-20">Inv</div>
@@ -28,14 +28,14 @@
             <input type="date" ng-model="shipmentdate.text" id="shipmentDate" style="color:blue;border-radius:10px;">
         </label>
         <div style="margin-top:5px;">
-            <span style="float:left;width:80%;padding-left:5%;padding-top:3%;" validNumber>Number of Pigs in Shipment</span>
-            <input type="text" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;border-radius:5px;" ng-model="pignoshipment.text">
+            <span style="float:left;width:80%;padding-left:5%;padding-top:3%;">Number of Pigs in Shipment</span>
+            <input type="text" style="float:left;width:16%;margin-top-top:10%;padding-right:4%;border-radius:5px;" ng-model="pignoshipment.text" valid-number>
         </div>
             <input type="text" style="float:left;width:90%;margin-left:5%;margin-right:5%;margin-top:5%;border-radius:10px;" placeholder="Name of supplier" ng-model="supplier.text">
             
             <a  style="padding-bottom:3%;border-radius:10px;text-align:center;background-color:white;color:black;width:41%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;text-decoration:none;" ng-click="submitShipment()" >Submit</a>
                 
             <a  style="border-radius:10px;text-align:center;background-color:white;color:black;width:41%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;padding-bottom:3%;text-decoration:none;" href="#/app/barnHome/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" >Cancel</a>
-                        
+
         </ion-content>
 </ion-view>

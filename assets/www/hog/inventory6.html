@@ -1,6 +1,6 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="left">
-        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+        <button menu-toggle="left" class="button-clear"><img src="menu.png"/></button>
     </ion-nav-buttons>
     <div class="bar bar-subheader" style="border-top: 1px solid gray;height:8%">
         <h2 class="title" style="color:gray;">{{fname}}-{{lname}}-{{bname}}</h2>
@@ -20,10 +20,11 @@
             </div>
         </div>
 
+        <div style="float:left;width:100%;padding-bottom:5%;padding-bottom:5%;">
         <a  style="border-radius:10px;text-align:center;background-color:white;color:black;width:41%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;padding-bottom:3%;text-decoration:none;" href="#/app/barnHome/{{barn_id}}/{{bname}}/{{lname}}/{{fname}}" >Cancel</a>
 
         <a  style="padding-bottom:3%;border-radius:10px;text-align:center;background-color:white;color:black;width:41%;float:left;margin-top:5%;margin-left:5%;padding-top:3%;text-decoration:none;" ng-click="savePigtreatments()" >Review</a>
-
+        </div>
     </ion-content>
     
 </ion-view>
