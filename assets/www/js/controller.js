@@ -16,7 +16,7 @@ angular.module('starter.controllers', ['ionic'])
               }
               else{
                 // alert("2");
-                $scope.inventoryBtnStatus={text:"block"};
+                $scope.backbutton={text:"block"};
 
               }
             // }
@@ -29,10 +29,10 @@ angular.module('starter.controllers', ['ionic'])
             $scope.password = {text:''};
             $scope.submitbutton = function($window){
             var postData =  {
-            "username": $scope.name.text,
-            "password": $scope.password.text
-            //  "username": "fcho",
-            // "password": "demouser"
+            // "username": $scope.name.text,
+            // "password": $scope.password.text
+             "username": "fcho",
+            "password": "demouser"
             };
             var config = {
             headers: {
