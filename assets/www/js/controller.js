@@ -684,10 +684,19 @@ angular.module('starter.controllers', ['ionic'])
                              location.href="#/app/barnHome/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
                              });
           }
-          else
+          else if(ele.val()>$scope.curdate.text)
           {
               $ionicPopup.alert({
-                              title: 'Please enter valid shipment details',
+                              title: 'Please enter valid shipment date',
+                              template: '',
+                              buttons:[{text:"OK",type:"button button-clear button-positive"}]
+                              
+                              });
+          }
+           else
+          {
+              $ionicPopup.alert({
+                              title: 'Please enter all shipment details',
                               template: '',
                               buttons:[{text:"OK",type:"button button-clear button-positive"}]
                               
