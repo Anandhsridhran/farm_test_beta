@@ -1,7 +1,25 @@
 angular.module('starter.controllers', ['ionic'])
 
 .controller('AppCtrl', function($scope, $http) {
-            
+              $scope.logout=function(){
+                window.localStorage.removeItem('login_token');
+                window.localStorage.removeItem('id');
+                window.localStorage.removeItem('role');
+                window.localStorage.removeItem('farm');
+                window.localStorage.removeItem('barn_id');
+                window.localStorage.removeItem('location');
+              }
+              // $scope.backbutton=function(){
+              if(window.localStorage['role']=="BarnManager"){
+                // alert("1");
+                $scope.backbutton={text:"none"};
+              }
+              else{
+                // alert("2");
+                $scope.inventoryBtnStatus={text:"block"};
+
+              }
+            // }
             })
 
 .controller('loginCtrl', function($scope, $http, $ionicPopup) {
@@ -13,7 +31,7 @@ angular.module('starter.controllers', ['ionic'])
             var postData =  {
             "username": $scope.name.text,
             "password": $scope.password.text
-            //  "username": "fcbm",
+            //  "username": "fcho",
             // "password": "demouser"
             };
             var config = {
@@ -34,6 +52,7 @@ angular.module('starter.controllers', ['ionic'])
                           window.localStorage['farm']=data.farm_id;
                           window.localStorage['username']=data.username;
                           window.localStorage['barn_id']=data.barn_id;
+                          // backbutton();
                           if(data.role=="BarnManager")
                           {
                           // alert(JSON.stringify(data));
@@ -599,6 +618,7 @@ angular.module('starter.controllers', ['ionic'])
             }
             }
             $scope.date ={text: $filter("date")(Date.now(), 'yyyy-MM-dd')};
+            $scope.curdate ={text: $filter("date")(Date.now(), 'yyyy-MM-dd')};
              $scope.shipmentdate ={text: $filter("date")(Date.now(), 'yyyy-MM-dd')};
 //            alert($scope.date.text);
             var bid= $stateParams.barn_id;
@@ -643,7 +663,7 @@ angular.module('starter.controllers', ['ionic'])
             var ele = angular.element(document.getElementById("shipmentDate"));
             
            // alert($scope.shipmentdate.text);
-           if($scope.supplier.text!=""){
+           if($scope.supplier.text!=""&&ele.val()!=""&&ele.val()<=$scope.curdate.text){
             var bookData = {
             "barn_id": bid,
             "shipment_date": ele.val(),
@@ -667,7 +687,7 @@ angular.module('starter.controllers', ['ionic'])
           else
           {
               $ionicPopup.alert({
-                              title: 'Please enter the shipment details',
+                              title: 'Please enter valid shipment details',
                               template: '',
                               buttons:[{text:"OK",type:"button button-clear button-positive"}]
                               
@@ -679,21 +699,21 @@ angular.module('starter.controllers', ['ionic'])
             $scope.saveDate=function(){
             var ele = angular.element(document.getElementById("inventoryDate"));
            // alert(ele.val());
-            if(ele.val()!="")
+            if(ele.val()!="" && ele.val()<=$scope.curdate.text)
             {
+              // alert(ele.val());
+              // alert($scope.curdate.text);
             $rootScope.inventorydate={text:ele.val()};
             location.href="#/app/inventory3/"+bid+"/"+$scope.bname+"/"+$scope.lname+"/"+$scope.fname;
             }
             else
             {
             $ionicPopup.alert({
-                              title: 'Please select date ',
+                              title: 'Please select valid date ',
                               template: '',
                               buttons:[{text:"OK",type:"button button-clear button-positive"}]
                               
                               });
-            
-          
             }
             }
             $scope.pigdeathsonchange=function()

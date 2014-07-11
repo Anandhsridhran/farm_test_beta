@@ -3,9 +3,9 @@
         <ion-nav-bar class="bar-stable nav-title-slide-ios7">
 <!--            <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>-->
             <ion-nav-buttons side="right">
-                <ion-nav-back-button class="button-clear">
-                    <!-- <i class="icon ion-ios7-arrow-back"></i> -->
-                    <img src="back.png"/>
+                <ion-nav-back-button class="button-clear" style="display:{{backbutton.text}}">
+                    <i class="icon ion-ios7-arrow-back"></i>
+<!--                     <img src="back.png"/> -->
                 </ion-nav-back-button>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -18,7 +18,7 @@
         </header>
         <ion-content class="has-header">
             <ion-list  style="background-color:gray;">
-                <ion-item nav-clear menu-close href="#/app/login" style="background-color:gray;">
+                <ion-item nav-clear menu-close href="#/app/login" style="background-color:gray;" ng-click="logout()">
                     Logout
                 </ion-item>
             </ion-list>

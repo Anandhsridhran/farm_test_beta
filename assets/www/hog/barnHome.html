@@ -1,11 +1,12 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="left">
-        <button menu-toggle="left" class="button-clear"><img src="menu.png"/></button>
+        <!-- <button menu-toggle="left" class="button-clear"><img src="menu.png"/></button> -->
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
-    <div class="bar bar-subheader" style="border-top: 1px solid gray;height:8%;">
+    <ion-header-bar class="bar bar-subheader" style="border-top: 1px solid gray;">
         <h2 class="title" style="color:gray;">{{fname}}-{{lname}}</h2>
-    </div>
-    <ion-content class="has-header" style="background-color:#99aac7;margin-top:8%" id= "bodybarn">
+    </ion-header-bar>
+    <ion-content class="has-header" style="background-color:#99aac7;" id= "bodybarn">
         <div style="height:30%">
             <div style="margin-top:5%;margin-left:5%;float:left;width:55%;font-size:18px;"><img ng-src='img/{{systemstatus}}1.png' style="margin-right:5px;float:left;">
                 <span style="color:white">{{barname}}</span>
