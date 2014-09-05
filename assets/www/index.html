@@ -33,14 +33,14 @@
                             function onDeviceReady() {
                                alert("1");
                                pushNotification.register(successHandler, errorHandler,{"senderID":"524888059689","ecb":"onNotificationGCM"});
-                              // var parentElement = document.getElementById(id);
-                              // var listeningElement = parentElement.querySelector('.listening');
-                              // var receivedElement = parentElement.querySelector('.received');
-                              // alert("3");
-                              // listeningElement.setAttribute('style', 'display:none;');
-                              // receivedElement.setAttribute('style', 'display:block;');
+                              var parentElement = document.getElementById(id);
+                              var listeningElement = parentElement.querySelector('.listening');
+                              var receivedElement = parentElement.querySelector('.received');
+                              alert("3");
+                              listeningElement.setAttribute('style', 'display:none;');
+                              receivedElement.setAttribute('style', 'display:block;');
 
-                              // console.log('Received Event: ' + id);
+                              console.log('Received Event: ' + id);
                             }
                              function successHandler (result) {
                                 alert('Callback Success! Result = '+result)
