@@ -26,21 +26,22 @@
                         <script src="js/PushNotification.js"></script>
                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
                         <script src="js/SQLitePlugin.js"></script>
-                        <script type="text/javascript">
+                        <script type="text/javascript"> 
                             var pushNotification;
-                            pushNotification = window.plugins.pushNotification;
+                           
                             document.addEventListener("deviceready", onDeviceReady, false);
                             function onDeviceReady() {
+                               pushNotification = window.plugins.pushNotification;
                                alert("1");
                                pushNotification.register(successHandler, errorHandler,{"senderID":"524888059689","ecb":"onNotificationGCM"});
-                              var parentElement = document.getElementById(id);
-                              var listeningElement = parentElement.querySelector('.listening');
-                              var receivedElement = parentElement.querySelector('.received');
-                              alert("3");
-                              listeningElement.setAttribute('style', 'display:none;');
-                              receivedElement.setAttribute('style', 'display:block;');
+                            // var parentElement = document.getElementById(id);
+                            // var listeningElement = parentElement.querySelector('.listening');
+                            // var receivedElement = parentElement.querySelector('.received');
+                            alert("3");
+                            // listeningElement.setAttribute('style', 'display:none;');
+                            // receivedElement.setAttribute('style', 'display:block;');
 
-                              console.log('Received Event: ' + id);
+                            // console.log('Received Event: ' + id);
                             }
                              function successHandler (result) {
                                 alert('Callback Success! Result = '+result)
@@ -85,9 +86,7 @@
                                                           var id = $(this).attr("id");
                                                           $('#barnsul' + id).slideToggle('slow');
                                                           
-                                           });
-                                                          
-                                                          
+                                           });          
                             </script>
                         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
                         </head>
