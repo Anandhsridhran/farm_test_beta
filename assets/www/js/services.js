@@ -12,7 +12,7 @@ angular.module('starter.services', [])
 //var fa1 = [];
 
 .factory('db', function($http, $ionicLoading,$timeout) {
-        alert("1");
+        alert("s1");
          var dev_id = window.localStorage['dev_id'];
         alert(dev_id);
          var postData =  {
