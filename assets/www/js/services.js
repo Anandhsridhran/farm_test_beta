@@ -14,7 +14,7 @@ angular.module('starter.services', [])
 .factory('db', function($http, $ionicLoading,$timeout) {
         alert("1");
          var dev_id = window.localStorage['dev_id'];
-//         alert(dev_id);
+        alert(dev_id);
          var postData =  {
          "user_id": window.localStorage['id'],
          "regid": dev_id
@@ -26,10 +26,10 @@ angular.module('starter.services', [])
          }
          var device_id = $http.post('http://nano.amfnano.com/user_devices.json',JSON.stringify(postData),config);
          device_id.success(function (data, status, headers) {
-//                           alert("successfully enabled Push Notification");
+                          alert("successfully enabled Push Notification");
                        });
          device_id.error(function (data, status, headers) {
-//                         alert("error");
+                        alert("error");
                         });
          
          var sync = function (){
