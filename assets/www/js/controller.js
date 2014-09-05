@@ -23,7 +23,7 @@ angular.module('starter.controllers', ['ionic'])
             })
 
 .controller('loginCtrl', function($scope, $http, $ionicPopup) {
-           
+           $scope.mid = window.localStorage['dev_id'];
             var logdata=[];
             $scope.name = {text:''};
             $scope.password = {text:''};
@@ -76,7 +76,18 @@ angular.module('starter.controllers', ['ionic'])
             }
             })
 
-.controller('dashCtrl', function($scope, $http,$timeout, $ionicLoading,$ionicPopup) {
+.controller('loadCtrl', function($scope, $stateParams, app) {
+            
+            })
+.controller('setCtrl', function($scope, $stateParams, db) {
+            $scope.sync = db.sync();
+//            alert(db.successHandler());
+//            function sync(){
+//            db.createDatabase();
+//            }
+            }) 
+
+.controller('dashCtrl', function($scope, $http,$timeout, $ionicLoading,$ionicPopup, db) {
             
             // Setup the loader
             $ionicLoading.show({
@@ -90,6 +101,7 @@ angular.module('starter.controllers', ['ionic'])
                      $ionicLoading.hide();
                      },3000);
             //Farm GET http request
+            $scope.sync = db.sync();
             var name = window.localStorage["first_name"]+" "+window.localStorage["last_name"];
             
             window.localStorage["PigTreatsCount"]=null;

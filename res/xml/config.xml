@@ -22,4 +22,7 @@
     <feature name="Keyboard">
             <param name="android-package" value="IonicKeyboard" onload="true" />
     </feature>
+    <feature name="SQLitePlugin">
+            <param name="android-package" value="org.pgsqlite.SQLitePlugin" onload="true" />
+    </feature>
 </widget>
