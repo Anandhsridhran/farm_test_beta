@@ -137,7 +137,7 @@ angular.module('starter.services', [])
          //         tx.executeSql('Delete FROM barns',[]);
          //         tx.executeSql('Delete FROM readings',[]);
          //         tx.executeSql('CREATE TABLE IF NOT EXISTS barn_readings (`barn_id` ,`bname`, `btotalpigs`, `blocation_id`,``)');
-//         alert("1");
+        alert("db1");
          for (var index=0; index<farms.length; index++)
          {
          tx.executeSql('INSERT INTO farms (farm_id, fname, fsystem_status, fstreet_address, fcity, fstate, fpostal_code) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -266,7 +266,7 @@ angular.module('starter.services', [])
          location.href = '#/app/list';
          }
 //         location.href = '#/app/list';
-         //         alert("Done");
+                 alert("Done");
          //         alert(JSON.stringify(fa1));
          //         window.localStorage['flists'] = fa1;
          //         alert(JSON.stringify(window.localStorage['flists']));
