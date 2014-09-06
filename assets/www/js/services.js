@@ -140,8 +140,10 @@ angular.module('starter.services', [])
         alert("db1");
          for (var index=0; index<farms.length; index++)
          {
+            alert("1f");
          tx.executeSql('INSERT INTO farms (farm_id, fname, fsystem_status, fstreet_address, fcity, fstate, fpostal_code) VALUES (?, ?, ?, ?, ?, ?, ?)',
                        [farms[index].farm_id,farms[index].name,farms[index].system_status,farms[index].street_address,farms[index].city,farms[index].state,farms[index].postal_code]);
+            alert("2f");
          }
          
          for (var index=0; index<sites.length; index++)
