@@ -29,7 +29,7 @@ angular.module('starter.services', [])
                           alert("successfully enabled Push Notification");
                        });
          device_id.error(function (data, status, headers) {
-                        alert("error");
+                        alert("errorPN");
                         });
          
          var sync = function (){
@@ -62,7 +62,7 @@ angular.module('starter.services', [])
                           location_db();
                           });
          farmjson.error(function (data, status, headers) {
-                        alert("error");
+                        alert("error1");
                         });
          function location_db(){
          for (var index=0; index<farms.length; index++)
