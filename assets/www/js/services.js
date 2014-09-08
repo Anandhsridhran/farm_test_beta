@@ -140,22 +140,26 @@ angular.module('starter.services', [])
         alert("db1");
          for (var index=0; index<farms.length; index++)
          {
-            alert("1f");
+           
          tx.executeSql('INSERT INTO farms (farm_id, fname, fsystem_status, fstreet_address, fcity, fstate, fpostal_code) VALUES (?, ?, ?, ?, ?, ?, ?)',
                        [farms[index].farm_id,farms[index].name,farms[index].system_status,farms[index].street_address,farms[index].city,farms[index].state,farms[index].postal_code]);
-            alert("2f");
+            
          }
          
          for (var index=0; index<sites.length; index++)
          {
+             alert("1s");
          tx.executeSql('INSERT INTO sites (location_id, lname, lsystem_status, lstreet_address, lcity, lstate, lpostal_code, lfarm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                        [sites[index].location_id,sites[index].name,sites[index].system_status,sites[index].street_address,sites[index].city,sites[index].state,sites[index].postal_code,sites[index].farm_id]);
+         alert("2s");
          }
          
          for (var index=0; index<barns.length; index++)
          {
+            alert("1b");
          tx.executeSql('INSERT INTO barns (barn_id, bname, blocation_id, btotalpigs) VALUES (?, ?, ?, ?)',
                        [barns[index].id,barns[index].name,barns[index].location_id,barns[index].total_pigs]);
+         alert("2b");
          }
          
          for (var index=0; index<reading.length; index++)
