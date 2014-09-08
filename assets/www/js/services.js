@@ -225,6 +225,7 @@ angular.module('starter.services', [])
                        var len = results.rows.length;
                        for(var c=0; c<len; c++){
                        fa1.push(results.rows.item(c))
+                       alert(fa1);
                        }
                        });
          tx.executeSql('SELECT * FROM sites', [], function(tx,results){
@@ -259,14 +260,14 @@ angular.module('starter.services', [])
          
          function successHandler()
          {
-         if(window.localStorage['role']=="BarnManager")
-         {
-         location.href = '#/app/barnmanager/'+window.localStorage['barn_id']+'/'+window.localStorage['barn_id']+'/'+window.localStorage['location']+'/'+window.localStorage['farm'];
-         }
-         else
-         {
-         location.href = '#/app/list';
-         }
+         // if(window.localStorage['role']=="BarnManager")
+         // {
+         // location.href = '#/app/barnmanager/'+window.localStorage['barn_id']+'/'+window.localStorage['barn_id']+'/'+window.localStorage['location']+'/'+window.localStorage['farm'];
+         // }
+         // else
+         // {
+         // location.href = '#/app/list';
+         // }
 //         location.href = '#/app/list';
                  alert("Done");
          //         alert(JSON.stringify(fa1));
