@@ -220,13 +220,14 @@ angular.module('starter.services', [])
          var ir_feeds = data[index].ir_feeds[0].value;
          }
          }
-         alert("r2");
+         // alert("r2");
          tx.executeSql('INSERT INTO readings (barn_id, barn_name, temperatures, humidity, status, AC_power, ir_feeds, reported_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                        [idb,barn_name,temperatures,humidity,system_status,AC_power,ir_feeds,reported_at]);
-         alert("r3");
+         // alert("r3");
          }
          tx.executeSql('SELECT * FROM farms', [], function(tx,results)
                        {
+                        alert("frf")
                        fa1 = [];
                        var len = results.rows.length;
                        for(var c=0; c<len; c++){
