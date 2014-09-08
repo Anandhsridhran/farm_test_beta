@@ -148,23 +148,23 @@ angular.module('starter.services', [])
          
          for (var index=0; index<sites.length; index++)
          {
-             alert("1s");
+             // alert("1s");
          tx.executeSql('INSERT INTO sites (location_id, lname, lsystem_status, lstreet_address, lcity, lstate, lpostal_code, lfarm_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                        [sites[index].location_id,sites[index].name,sites[index].system_status,sites[index].street_address,sites[index].city,sites[index].state,sites[index].postal_code,sites[index].farm_id]);
-         alert("2s");
+         // alert("2s");
          }
          
          for (var index=0; index<barns.length; index++)
          {
-            alert("1b");
+            // alert("1b");
          tx.executeSql('INSERT INTO barns (barn_id, bname, blocation_id, btotalpigs) VALUES (?, ?, ?, ?)',
                        [barns[index].id,barns[index].name,barns[index].location_id,barns[index].total_pigs]);
-         alert("2b");
+         // alert("2b");
          }
          
          for (var index=0; index<reading.length; index++)
          {
-         //         alert("1");
+                 // alert("r1");
          var idb = ids[index];
          var data = reading;
          //         alert(JSON.stringify(data[index]))
@@ -220,8 +220,10 @@ angular.module('starter.services', [])
          var ir_feeds = data[index].ir_feeds[0].value;
          }
          }
+         alert("r2");
          tx.executeSql('INSERT INTO readings (barn_id, barn_name, temperatures, humidity, status, AC_power, ir_feeds, reported_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                        [idb,barn_name,temperatures,humidity,system_status,AC_power,ir_feeds,reported_at]);
+         alert("r3");
          }
          tx.executeSql('SELECT * FROM farms', [], function(tx,results)
                        {
